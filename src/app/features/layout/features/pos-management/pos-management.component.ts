@@ -218,6 +218,7 @@ export class PosManagementComponent implements OnInit {
   // Handle raise ticket action
   raiseTicket(agent: AgentData) {
     console.log('Raise ticket for agent:', agent);
+    this.showPosModal = true;
     // Implement ticket raising functionality
   }
 
