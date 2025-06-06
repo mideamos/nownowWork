@@ -1,4 +1,6 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NgModel } from '@angular/forms';
 
 interface AgentData {
   serialNo: number;
@@ -21,6 +23,7 @@ interface MetricCard {
 
 @Component({
   selector: 'app-pos-management',
+  imports: [CommonModule],
   templateUrl: './pos-management.component.html',
   styleUrl: './pos-management.component.scss'
 })
@@ -28,35 +31,36 @@ export class PosManagementComponent implements OnInit {
   
   metricCards: MetricCard[] = [
     {
-      title: 'Active Agent',
+      title: 'Active POS',
       value: '92',
       subtitle: 'Transacted in last 24 hours',
       type: 'agent'
     },
     {
-      title: 'In-Active Agent',
+      title: 'In-Active POS',
       value: '08',
       subtitle: 'Transacted in last 24 hours',
       type: 'agent'
     },
     {
-      title: 'De-Active Agent',
+      title: 'De-Active POS',
       value: '10',
       subtitle: 'Transacted in last 24 hours',
       type: 'agent'
     },
     {
-      title: 'Inward Transaction (Today)',
-      value: '₦2,345,800.00',
-      subtitle: 'No of Transaction  2345',
-      type: 'transaction'
+      title: 'Retrived POS',
+      value: '10',
+      subtitle: 'POS retrived from the Agent',
+      type: 'agent'
     },
-    {
-      title: 'Outward Transaction ( Today )',
-      value: '₦2,345,800.00',
-      subtitle: 'No of Transaction  2345',
-      type: 'transaction'
+        {
+      title: 'Non-Functional POS',
+      value: '08',
+      subtitle: 'Ticket raised for non-functional POS machine',
+      type: 'agent'
     }
+
   ];
 
   agentData: AgentData[] = [
@@ -128,7 +132,36 @@ export class PosManagementComponent implements OnInit {
     }
   ];
 
+
+  showRemappingModal: boolean = false;
+  showPosModal: boolean = false;
   ngOnInit() {}
+
+  openRemapModal(): void {
+    this.showRemappingModal = true;
+  }
+
+  openPosModal(): void {
+    this.showPosModal = true;
+  }
+
+  closeRemapModal(): void {
+    this.showRemappingModal = false;
+  }
+
+  closePosModal(): void {
+    this.showPosModal = false;
+  }
+
+  sendReMapPos(): void {
+     console.log('Sending Remap Pos to:');
+      this.closeRemapModal();
+  }
+
+  sendPos(): void {
+     console.log('Sending Pos to:');
+      this.closePosModal();
+  }
 
   onAddAgent() {
     console.log('Add Agent clicked');
@@ -143,6 +176,8 @@ export class PosManagementComponent implements OnInit {
 
   editAgent(agent: AgentData) {
     console.log('Edit agent:', agent);
+    // openemail modal
+    this.showRemappingModal = true;
     // Implement edit functionality
   }
 
@@ -165,4 +200,25 @@ export class PosManagementComponent implements OnInit {
   formatBalance(balance: number): string {
     return balance.toLocaleString('en-US', { minimumFractionDigits: 2 });
   }
+
+  formatStatus(status: string): string {
+  const statusLower = status.toLowerCase();
+  if (statusLower.includes('mapped')) return 'Mapped';
+  if (statusLower.includes('created') || statusLower.includes('activated')) return 'Unmapped';
+  return status;
+  }
+  // Determine ticket status
+  getTicketStatus(agent: AgentData): string {
+    // Sample logic, can be replaced with real data
+    if (!agent.posSerialNo || agent.posSerialNo === 'N/A') return 'No attached';
+    if (agent.status.toLowerCase().includes('closed')) return 'Closed';
+    return 'N/A';
+  }
+
+  // Handle raise ticket action
+  raiseTicket(agent: AgentData) {
+    console.log('Raise ticket for agent:', agent);
+    // Implement ticket raising functionality
+  }
+
 }

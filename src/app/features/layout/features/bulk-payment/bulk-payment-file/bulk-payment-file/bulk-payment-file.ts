@@ -138,7 +138,8 @@ export class BulkPaymentFile {
     // Implement download functionality
     console.log('Download receipt for:', this.selectedReceipt);
   }
-    openEmailModal(): void {
+  
+  openEmailModal(): void {
     this.showEmailModal = true;
   }
 
