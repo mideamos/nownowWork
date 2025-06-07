@@ -111,7 +111,7 @@ export class SidebarComponent {
         {
           id: 'fund-internal-wallet',
           label: 'Add funds to internal wallet',
-          route: AccountPaths.addBeneficiary,
+          route: AccountPaths.Addfundstointernalwallet,
         },
         {
           id: 'schedule-internal-wallet',
@@ -121,7 +121,7 @@ export class SidebarComponent {
         {
           id: 'internal-wallet-transfer',
           label: 'Instant Internal Wallet transfer',
-          route: AccountPaths.bulkPayment,
+          route: AccountPaths.internalwallettransfer,
         },
         {
           id: 'transfer-history',

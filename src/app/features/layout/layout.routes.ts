@@ -12,6 +12,10 @@ export const AccountPaths = {
   singlePayment: 'single-payment',
   bulkPayment: 'bulk-payment',
   bulkPaymentFile: 'bulk-payment-file/:id',
+  Addfundstointernalwallet: 'add-funds-to-internal-wallet',
+  scheduleinternalwallettransfer: 'schedule-internal-wallet-transfer',
+  internalwallettransfer: 'internal-wallet-transfer',
+  transferhistory: 'transfer-history',
 
 
 };
@@ -102,6 +106,22 @@ export default [
             (c) => c.PosManagementComponent
           ),
         data: { title: 'pos management' },
+      },
+      {
+        path: AccountPaths.Addfundstointernalwallet,
+        loadComponent: () =>
+          import('./features/addfundstointernalwallet/addfundstointernalwallet').then(
+            (c) => c.Addfundstointernalwallet
+          ),
+        data: { title: 'Add funds to internal wallet' },
+      },
+      {
+        path: AccountPaths.internalwallettransfer,
+        loadComponent: () =>
+          import('./features/internalwallettransfer/internalwallettransfer').then(
+            (c) => c.Internalwallettransfer
+          ),
+        data: { title: 'Instant Internal wallet transfer' },
       },
       {
         path: '',
