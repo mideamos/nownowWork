@@ -1,4 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Component, OnInit, HostListener, ViewChild, ElementRef } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { NgModule } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
+
+
 
 interface TransactionData {
   date: string;
@@ -24,15 +34,34 @@ interface TransactionData {
 
 @Component({
   selector: 'app-bulk-payment2',
+  standalone: true,
+  imports: [MatDatepickerModule, MatFormFieldModule, MatInputModule, CommonModule, FormsModule, MatIconModule ],
   templateUrl: './transactions.component.html',
-  styleUrl: './transactions.component.scss'
+  styleUrl: './transactions.component.scss',
+  providers: [provideNativeDateAdapter()]
 })
 export class TransactionsComponent implements OnInit {
+  showExportDropdown = false;
+  @ViewChild('exportDropdown') exportDropdown!: ElementRef;
+
   activeTab: 'transaction' | 'settlement' = 'transaction';
+  filterText: string = '';
+  searchText: string = '';
+  searchedTransaction: TransactionData[] = [];
+  originalSearchTransactions: TransactionData[] = [];
+  filteredtransactions: TransactionData[] = [];
+  originaltransactions: TransactionData[] = [];
+
+  startDate = new Date('05/14/2025');
+  endDate = new Date('05/20/2025');
+  picker: any; // Placeholder for datepicker reference
+  // Date Range
   dateRange = {
-    startDate: '05/14/2025',
-    endDate: '05/20/2025'
+    startDate: this.startDate,
+    endDate: this.endDate
   };
+
+  
 
   transactionData: TransactionData[] = [
     {
@@ -220,6 +249,95 @@ export class TransactionsComponent implements OnInit {
     console.log('Download report');
     // Implement download functionality
   }
+
+  applyFilter() {
+  if (!this.filterText) {
+    this.filteredtransactions = [...this.originaltransactions];
+    return;
+  }
+
+    const searchText = this.filterText.toLowerCase();
+    this.filteredtransactions = this.originaltransactions.filter(detail =>
+      detail.acctName.toLowerCase().includes(searchText) ||
+      detail.acctNum.includes(searchText) ||
+      detail.merchantOrderID.includes(searchText) ||
+      detail.tranRN.toString().includes(searchText) ||
+      detail.tranStatus.toLowerCase().includes(searchText) ||
+      detail.cardType.toLowerCase().includes(searchText) ||
+      detail.country.toLowerCase().includes(searchText) ||
+      detail.currency.toLowerCase().includes(searchText) ||
+      detail.authCode.toLowerCase().includes(searchText) ||
+      detail.time.toLowerCase().includes(searchText) ||
+      detail.lst4Digit.includes(searchText) ||
+      (detail.cardIssBank && detail.cardIssBank.toLowerCase().includes(searchText))
+    );
+  }
+
+  applySearch() {
+  if (!this.searchText) {
+    this.searchedTransaction = [...this.originalSearchTransactions];
+    return;
+  }
+
+    const searchText = this.searchText.toLowerCase();
+    this.searchedTransaction = this.originalSearchTransactions.filter(detail =>
+      detail.acctName.toLowerCase().includes(searchText) ||
+      detail.acctNum.includes(searchText) ||
+      detail.merchantOrderID.includes(searchText) ||
+      detail.tranRN.toString().includes(searchText) ||
+      detail.tranStatus.toLowerCase().includes(searchText) ||
+      detail.cardType.toLowerCase().includes(searchText) ||
+      detail.country.toLowerCase().includes(searchText) ||
+      detail.currency.toLowerCase().includes(searchText) ||
+      detail.authCode.toLowerCase().includes(searchText) ||
+      detail.time.toLowerCase().includes(searchText) ||
+      detail.lst4Digit.includes(searchText) ||
+      (detail.cardIssBank && detail.cardIssBank.toLowerCase().includes(searchText))
+    );
+  }
+
+    toggleExportDropdown() {
+    this.showExportDropdown = !this.showExportDropdown;
+    }
+
+    @HostListener('document:click', ['$event'])
+    onClick(event: MouseEvent) {
+      if (!this.exportDropdown.nativeElement.contains(event.target)) {
+        this.showExportDropdown = false;
+      }
+    }
+
+    exportAs(format: 'pdf' | 'excel' | 'csv') {
+      this.showExportDropdown = false;
+      
+      // Add your export logic here
+      switch (format) {
+        case 'pdf':
+          this.exportToPDF();
+          break;
+        case 'excel':
+          this.exportToExcel();
+          break;
+        case 'csv':
+          this.exportToCSV();
+          break;
+      }
+    }
+
+    private exportToPDF() {
+      console.log('Exporting to PDF');
+      // Implement PDF export logic
+    }
+
+    private exportToExcel() {
+      console.log('Exporting to Excel');
+      // Implement Excel export logic
+    }
+
+    private exportToCSV() {
+      console.log('Exporting to CSV');
+      // Implement CSV export logic
+    }
 
   getStatusClass(status: string): string {
     switch (status.toLowerCase()) {

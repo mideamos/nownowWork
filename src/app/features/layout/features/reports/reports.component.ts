@@ -355,7 +355,7 @@ export class ReportsComponent implements OnInit {
     }
   }
 
-    applyFilter() {
+  applyFilter() {
     if (!this.filterText) {
       this.filteredtransactions = [...this.originaltransactions];
       return;
