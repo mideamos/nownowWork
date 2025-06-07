@@ -59,3 +59,18 @@ table {
     padding: 2px;
   }
 }
+
+/* Custom outline color */
+.mat-form-field-appearance-outline .mat-form-field-outline {
+  color: #3f51b5; /* Primary color */
+}
+
+/* Focused state */
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-outline-thick {
+  color: #ff4081; /* Accent color */
+}
+
+/* Label color */
+.mat-form-field-appearance-outline.mat-focused .mat-form-field-label {
+  color: #ff4081;
+}
