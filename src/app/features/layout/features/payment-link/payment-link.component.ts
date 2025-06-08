@@ -1,236 +1,95 @@
+import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { provideNativeDateAdapter } from '@angular/material/core';
+import { NgModule } from '@angular/core';
+import { MatIconModule } from '@angular/material/icon';
 
-interface TransactionData {
-  date: string;
-  time: string;
-  tranRN: string;
-  acctName: string;
-  acctNum: string;
-  merchantOrderID: string;
-  currency: string;
-  transAmt: number;
-  debCred: string;
-  tranStatus: string;
-  nowNowChrg: number;
-  tranType: string;
-  authCode: string;
-  cardType: string;
-  lst4Digit: string;
-  cardIssBank: string;
-  country: string;
-  currencyType: string;
-  convRate: number;
+interface Transaction {
+  transferName: string;
+  expiryDate: string;
+  transferFrequency: string;
+  frequencyVariable: string;
+  transferFrom: string;
+  transferTo: string;
+  description: string;
+  minWalletBalance: string;
+  status: string;
 }
+
 
 @Component({
   selector: 'app-payment-link',
+  standalone: true,
+  imports: [MatDatepickerModule, MatFormFieldModule, MatInputModule, CommonModule, FormsModule, MatIconModule ],
   templateUrl: './payment-link.component.html',
-  styleUrl: './payment-link.component.scss'
+  styleUrl: './payment-link.component.scss',
+    providers: [provideNativeDateAdapter()]
 })
-export class PaymentLinkComponent implements OnInit {
-  activeTab: 'transaction' | 'settlement' = 'transaction';
-  dateRange = {
-    startDate: '05/14/2025',
-    endDate: '05/20/2025'
-  };
+export class PaymentLinkComponent  {
+filterText: string = '';
 
-  transactionData: TransactionData[] = [
+  // Sample data for transactions
+  transactions: Transaction[] = [
     {
-      date: '12-10-24',
-      time: '10:15 AM',
-      tranRN: '3490459',
-      acctName: 'Wisdom',
-      acctNum: '234589843',
-      merchantOrderID: 'ORD1001',
-      currency: 'NGN',
-      transAmt: 1000,
-      debCred: 'Debit',
-      tranStatus: 'Successful',
-      nowNowChrg: 20,
-      tranType: 'Card',
-      authCode: 'A182C3',
-      cardType: 'Master Card',
-      lst4Digit: '5436',
-      cardIssBank: 'Interswitch',
-      country: 'Spain',
-      currencyType: 'Euros',
-      convRate: 1600
+      transferName: 'Monthly Savings',
+      expiryDate: '2023-12-31',
+      transferFrequency: 'Monthly',
+      frequencyVariable: '1st of month',
+      transferFrom: 'Main Wallet',
+      transferTo: 'Savings Wallet',
+      description: 'Automatic monthly savings transfer',
+      minWalletBalance: '1000',
+      status: 'Active'
     },
     {
-      date: '12-10-24',
-      time: '10:15 AM',
-      tranRN: '3490459',
-      acctName: 'Wisdom',
-      acctNum: '234589843',
-      merchantOrderID: 'ORD1001',
-      currency: 'NGN',
-      transAmt: 1000,
-      debCred: 'Debit',
-      tranStatus: 'Successful',
-      nowNowChrg: 20,
-      tranType: 'Card',
-      authCode: 'A182C3',
-      cardType: 'Master Card',
-      lst4Digit: '5436',
-      cardIssBank: 'Interswitch',
-      country: 'Spain',
-      currencyType: 'Euros',
-      convRate: 1600
+      transferName: 'Weekly Investment',
+      expiryDate: '2023-12-31',
+      transferFrequency: 'Weekly',
+      frequencyVariable: 'Every Monday',
+      transferFrom: 'Main Wallet',
+      transferTo: 'Investment Wallet',
+      description: 'Weekly investment allocation',
+      minWalletBalance: '500',
+      status: 'Active'
     },
     {
-      date: '12-10-24',
-      time: '10:15 AM',
-      tranRN: '3490459',
-      acctName: 'Wisdom',
-      acctNum: '234589843',
-      merchantOrderID: 'ORD1001',
-      currency: 'NGN',
-      transAmt: 1000,
-      debCred: 'Debit',
-      tranStatus: 'Successful',
-      nowNowChrg: 20,
-      tranType: 'Card',
-      authCode: 'A182C3',
-      cardType: 'Master Card',
-      lst4Digit: '5436',
-      cardIssBank: 'Interswitch',
-      country: 'Spain',
-      currencyType: 'Euros',
-      convRate: 1600
-    },
-    {
-      date: '12-10-24',
-      time: '10:15 AM',
-      tranRN: '3490459',
-      acctName: 'Wisdom',
-      acctNum: '234589843',
-      merchantOrderID: 'ORD1001',
-      currency: 'NGN',
-      transAmt: 1000,
-      debCred: 'Debit',
-      tranStatus: 'Successful',
-      nowNowChrg: 20,
-      tranType: 'Card',
-      authCode: 'A182C3',
-      cardType: 'Master Card',
-      lst4Digit: '5436',
-      cardIssBank: 'Interswitch',
-      country: 'Spain',
-      currencyType: 'Euros',
-      convRate: 1600
-    },
-    {
-      date: '12-10-24',
-      time: '10:15 AM',
-      tranRN: '3490459',
-      acctName: 'Wisdom',
-      acctNum: '234589843',
-      merchantOrderID: 'ORD1001',
-      currency: 'NGN',
-      transAmt: 1000,
-      debCred: 'Debit',
-      tranStatus: 'Successful',
-      nowNowChrg: 20,
-      tranType: 'Card',
-      authCode: 'A182C3',
-      cardType: 'Master Card',
-      lst4Digit: '5436',
-      cardIssBank: 'Interswitch',
-      country: 'Spain',
-      currencyType: 'Euros',
-      convRate: 1600
-    },
-    {
-      date: '12-10-24',
-      time: '10:15 AM',
-      tranRN: '3490459',
-      acctName: 'Wisdom',
-      acctNum: '234589843',
-      merchantOrderID: 'ORD1001',
-      currency: 'NGN',
-      transAmt: 1000,
-      debCred: 'Debit',
-      tranStatus: 'Successful',
-      nowNowChrg: 20,
-      tranType: 'Card',
-      authCode: 'A182C3',
-      cardType: 'Master Card',
-      lst4Digit: '5436',
-      cardIssBank: 'Interswitch',
-      country: 'Spain',
-      currencyType: 'Euros',
-      convRate: 1600
-    },
-    {
-      date: '12-10-24',
-      time: '10:15 AM',
-      tranRN: '3490459',
-      acctName: 'Wisdom',
-      acctNum: '234589843',
-      merchantOrderID: 'ORD1001',
-      currency: 'NGN',
-      transAmt: 1000,
-      debCred: 'Debit',
-      tranStatus: 'Successful',
-      nowNowChrg: 20,
-      tranType: 'Card',
-      authCode: 'A182C3',
-      cardType: 'Master Card',
-      lst4Digit: '5436',
-      cardIssBank: 'Interswitch',
-      country: 'Spain',
-      currencyType: 'Euros',
-      convRate: 1600
-    },
-    {
-      date: '12-10-24',
-      time: '10:15 AM',
-      tranRN: '3490459',
-      acctName: 'Wisdom',
-      acctNum: '234589843',
-      merchantOrderID: 'ORD1001',
-      currency: 'NGN',
-      transAmt: 1000,
-      debCred: 'Debit',
-      tranStatus: 'Successful',
-      nowNowChrg: 20,
-      tranType: 'Card',
-      authCode: 'A182C3',
-      cardType: 'Master Card',
-      lst4Digit: '5436',
-      cardIssBank: 'Interswitch',
-      country: 'Spain',
-      currencyType: 'Euros',
-      convRate: 1600
+      transferName: 'Daily Expenses',
+      expiryDate: '2023-12-31',
+      transferFrequency: 'Daily',
+      frequencyVariable: '9:00 AM',
+      transferFrom: 'Main Wallet',
+      transferTo: 'Expense Wallet',
+      description: 'Daily expense allocation',
+      minWalletBalance: '200',
+      status: 'Inactive'
     }
   ];
 
-  ngOnInit() {}
-
-  setActiveTab(tab: 'transaction' | 'settlement') {
-    this.activeTab = tab;
-  }
-
-  onDateRangeChange(event: any) {
-    console.log('Date range changed:', event);
-    // Implement date range filtering logic
-  }
-
-  onDownload() {
-    console.log('Download report');
-    // Implement download functionality
-  }
-
   getStatusClass(status: string): string {
     switch (status.toLowerCase()) {
-      case 'successful':
-        return 'text-green-600 bg-green-50 px-2 py-1 rounded-full text-xs font-medium';
-      case 'failed':
-        return 'text-red-600 bg-red-50 px-2 py-1 rounded-full text-xs font-medium';
+      case 'active':
+        return 'bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm font-medium';
       case 'pending':
-        return 'text-yellow-600 bg-yellow-50 px-2 py-1 rounded-full text-xs font-medium';
+        return 'bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-medium';
+      case 'inactive':
+        return 'bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm font-medium';
       default:
-        return 'text-gray-600 bg-gray-50 px-2 py-1 rounded-full text-xs font-medium';
+        return 'bg-gray-100 text-gray-800 px-3 py-1 rounded-full text-sm font-medium';
+    }
+  }
+
+  applyFilter() {
+if (this.filterText) {
+      this.transactions = this.transactions.filter(transaction =>
+        Object.values(transaction).some(value =>
+          value.toString().toLowerCase().includes(this.filterText.toLowerCase())
+        )
+      );
     }
   }
 }
+
