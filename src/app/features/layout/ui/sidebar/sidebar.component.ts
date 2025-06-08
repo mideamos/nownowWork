@@ -126,7 +126,7 @@ export class SidebarComponent {
         {
           id: 'transfer-history',
           label: 'Transfer history',
-          route: AccountPaths.bulkPayment,
+          route: AccountPaths.transferhistory,
         },
       ],
     },

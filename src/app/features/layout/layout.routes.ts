@@ -124,6 +124,14 @@ export default [
         data: { title: 'Instant Internal wallet transfer' },
       },
       {
+        path: AccountPaths.transferhistory,
+        loadComponent: () =>
+          import('./features/transferhistory/transferhistory').then(
+            (c) => c.Transferhistory
+          ),
+        data: { title: 'Instant Internal wallet transfer' },
+      },
+      {
         path: '',
         redirectTo: `${AccountPaths.dashboard}`,
         pathMatch: 'full',
