@@ -34,6 +34,9 @@ export class TransactionsComponent implements OnInit {
     endDate: '05/20/2025'
   };
 
+
+  
+
   transactionData: TransactionData[] = [
     {
       date: '12-10-24',

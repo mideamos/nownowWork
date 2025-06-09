@@ -1,9 +1,10 @@
-import { NgOptimizedImage } from '@angular/common';
+import { NgOptimizedImage, NgIf } from '@angular/common';
+
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter, map } from 'rxjs';
 import { MatBadgeModule } from '@angular/material/badge';
-import { MatIcon } from '@angular/material/icon';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 import { AppPaths } from '@app/app.routes';
 import { AccountPaths } from '../layout.routes';
 
@@ -30,19 +31,41 @@ import { AccountPaths } from '../layout.routes';
           />
         </section>
         <hr class="rotate-90 w-6 border border-gray-200" />
-        <section class="flex items-center gap-x-3">
-          <div class="relative flex items-center gap-x-3 cursor-pointer">
+
+<section class="relative flex items-center gap-x-3">
+          <div class="relative cursor-pointer" (click)="toggleMenu()">
             <img
               ngSrc="/media/profile.jpg"
               alt="user image"
               width="60"
               height="60"
-              class="w-10 h-10 aspect-square object-cover rounded-lg"
+              class="w-10 h-10 object-cover rounded-lg"
             />
+            <span class="absolute bottom-0 right-0 h-2 w-2 bg-green-500 rounded-full"></span>
+          </div>
 
-            <span
-              class="absolute bottom-0 right-0 h-2 w-2 bg-green-500 rounded-full"
-            ></span>
+          <div
+            *ngIf="showMenu"
+            class="absolute right-0 top-14 mt-2 w-48 bg-white shadow-xl rounded-lg py-2 z-50 border border-gray-100"
+          >
+            <a
+              routerLink="/dashboard"
+              class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 text-sm"
+            >
+              <mat-icon>dashboard</mat-icon> Dashboard
+            </a>
+            <a
+              routerLink="/profile"
+              class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 text-sm"
+            >
+              <mat-icon>person</mat-icon> My Profile
+            </a>
+            <a
+              (click)="logout()"
+              class="flex items-center gap-3 px-4 py-2 hover:bg-gray-100 text-sm cursor-pointer"
+            >
+              <mat-icon>logout</mat-icon> Logout
+            </a>
           </div>
         </section>
       </div>
@@ -53,17 +76,32 @@ import { AccountPaths } from '../layout.routes';
             width: 100%;
         }
     `,
-  imports: [NgOptimizedImage, MatBadgeModule, MatIcon],
+  imports: [NgOptimizedImage, MatBadgeModule, MatIcon, MatIconModule, NgIf],
 })
 export class DesktopNavComponent {
   private readonly route = inject(ActivatedRoute);
-  readonly pageTitle = inject(Router).events.pipe(
+  readonly router = inject(Router);
+
+  readonly pageTitle = this.router.events.pipe(
     filter((event) => event instanceof NavigationEnd),
     map(() => this.route.snapshot.firstChild?.data?.['title'])
   );
+
   readonly initialTitle = signal<string>(
     this.route.snapshot.firstChild?.data?.['title']
   );
+
   readonly AppPath = AppPaths;
   readonly AccountPath = AccountPaths;
+
+  showMenu = false;
+
+  toggleMenu() {
+    this.showMenu = !this.showMenu;
+  }
+
+  logout() {
+    // Add real logout logic here
+    this.router.navigate(['/login']);
+  }
 }
