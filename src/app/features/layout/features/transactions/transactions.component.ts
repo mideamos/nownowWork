@@ -61,7 +61,10 @@ export class TransactionsComponent implements OnInit {
     endDate: this.endDate
   };
 
-  
+
+
+
+
 
   transactionData: TransactionData[] = [
     {
@@ -309,7 +312,7 @@ export class TransactionsComponent implements OnInit {
 
     exportAs(format: 'pdf' | 'excel' | 'csv') {
       this.showExportDropdown = false;
-      
+
       // Add your export logic here
       switch (format) {
         case 'pdf':

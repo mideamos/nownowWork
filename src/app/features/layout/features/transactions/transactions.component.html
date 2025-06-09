@@ -2,32 +2,25 @@
 <!-- Recent Transactions Component -->
    <div class="flex justify-between items-center mb-8">
     <h1 class="text-2xl font-semibold text-gray-800">Recent Transactions</h1>
-   </div>
 
-  <!-- Header with title and search -->
-  <div class="flex justify-between items-center mb-4">
-    <!-- Search -->
-    <div class="relative">
-      <input
-        type="text"
-        [(ngModel)]="searchText"
-        inputmode="seacrh"
-        placeholder="Search by Order ID, Account Name, or Account Number"
-        (keyup.enter)="applySearch()"
-        (input)="applySearch()"
-        class="pl-10 pr-4 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 h-10 w-110"
-      >
-      <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-        <mat-icon>search</mat-icon>
+    <!-- Date Range and Download -->
+    <div class="flex items-center space-x-4">
+      <div class="flex items-center border border-gray-300 rounded-lg px-4 py-2 bg-white">
+        <svg class="w-5 h-5 text-gray-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+        </svg>
+        <input
+          type="text"
+          [value]="dateRange.startDate + ' - ' + dateRange.endDate"
+          (change)="onDateRangeChange($event)"
+          class="text-sm text-gray-600 bg-transparent border-none outline-none"
+          readonly
+        >
       </div>
-    </div>
 
-
- <!-- Export Dropdown -->
-    <div class="relative inline-block text-left" #exportDropdown>
       <button
-        (click)="toggleExportDropdown()"
-        class="inline-flex justify-center items-center bg-gray-800 hover:bg-gray-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 h-9"
+        (click)="onDownload()"
+        class="bg-gray-800 hover:bg-gray-900 text-white px-6 py-2 rounded-lg font-medium transition-colors"
       >
         <mat-icon class="mr-2 text-white">download</mat-icon>
         Export
@@ -77,7 +70,7 @@
 
     <!-- Horizontal line across the top -->
   <hr class="border-t border-gray-200 mb-6">
-  
+
   <!-- Date Range and Filter - Now aligned left -->
   <div class="flex items-center mb-6">
     <!-- Filter -->
@@ -135,7 +128,7 @@
         <!-- Table Body -->
         <tbody class="bg-white divide-y divide-gray-200">
             @for (transaction of transactionData; track $index) {
-                <tr 
+                <tr
                   class="hover:bg-gray-50 transition-colors"
                   [class.bg-gray-25]="$index % 2 === 1"
                 >
@@ -167,7 +160,7 @@
     <div class="text-sm text-gray-700">
       Showing <span class="font-medium">1</span> to <span class="font-medium">8</span> of <span class="font-medium">{{ transactionData.length }}</span> results
     </div>
-    
+
     <div class="flex items-center space-x-2">
       <button class="px-3 py-2 text-sm font-medium text-gray-500 bg-white border border-gray-300 rounded-md hover:bg-gray-50 disabled:opacity-50" disabled>
         Previous

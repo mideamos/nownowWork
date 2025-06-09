@@ -2,8 +2,8 @@
   <!-- User Profile Section -->
   <div class="flex items-center mb-8">
     <div class="w-16 h-16 rounded-lg overflow-hidden mr-4">
-      <img 
-        [ngSrc]="user.avatar" 
+      <img
+        [ngSrc]="user.avatar"
         [alt]="user.name"
         width="80"
         height="70"
@@ -36,22 +36,25 @@
                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
                      </svg>
                  }
-                 
+
                  <!-- Reports Icon -->
                   @if (item.icon === 'document') {
                       <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                       </svg>
                   }
-                
-                
+
+
                 <!-- Transactions Icon -->
                  @if (item.icon === 'currency-dollar') {
-                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1"/>
-                     </svg>
+                  <svg width="24" height="24" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20.5047 13.3365C20.3142 12.8008 19.9629 12.3371 19.4987 12.0089C19.0346 11.6806 18.4804 11.5038 17.9119 11.5026H15.7834C15.1761 11.4994 14.5893 11.7215 14.1363 12.126C13.6833 12.5304 13.3964 13.0884 13.331 13.6922C13.2656 14.2959 13.4264 14.9024 13.7823 15.3944C14.1382 15.8865 14.6639 16.2291 15.2577 16.356L18.4988 17.0631C19.1615 17.2082 19.7472 17.5931 20.1434 18.1438C20.5396 18.6945 20.7184 19.3721 20.6453 20.0466C20.5722 20.7211 20.2524 21.3447 19.7475 21.7978C19.2425 22.2508 18.5879 22.5013 17.9095 22.501H16.078C14.8806 22.501 13.8623 21.7373 13.4851 20.6695M16.9949 11.5026V8.75183M16.9949 25.2518V22.5034M5.52979 32.6438V26.751H11.4226" stroke="#1E1E1E" stroke-opacity="0.6" stroke-width="2.43" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M32.3775 14.508C33.0033 17.8438 32.5037 21.2931 30.9571 24.3143C29.4106 27.3355 26.9046 29.7576 23.8326 31.2006C20.7606 32.6436 17.2964 33.0256 13.9837 32.2869C10.6711 31.5481 7.69747 29.7302 5.52968 27.1187M2.26268 20.1463C1.63692 16.8104 2.13652 13.3612 3.68307 10.34C5.22962 7.31878 7.73557 4.8966 10.8076 3.45364C13.8796 2.01068 17.3438 1.6286 20.6565 2.36739C23.9692 3.10618 26.9427 4.92401 29.1105 7.53556" stroke="#1E1E1E" stroke-opacity="0.6" stroke-width="2.43" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M29.1106 2.01041V7.90326H23.2178" stroke="#1E1E1E" stroke-opacity="0.6" stroke-width="2.43" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+
                  }
-                
+
                 <!-- Credit Card Icon -->
                  @if (item.icon === 'credit-card') {
                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -59,7 +62,7 @@
                      </svg>
                  }
 
-                
+
                 <!-- Transfer Icon -->
                  @if (item.icon === 'switch-horizontal') {
                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -67,7 +70,7 @@
                      </svg>
                  }
 
-                
+
                 <!-- Link Icon -->
                  @if (item.icon === 'link') {
                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -75,7 +78,7 @@
                      </svg>
                  }
 
-                
+
                 <!-- User Icon -->
                  @if (item.icon === 'user') {
                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -83,7 +86,7 @@
                      </svg>
                  }
 
-                
+
                 <!-- Calculator Icon -->
                  @if (item.icon === 'calculator') {
                      <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -92,29 +95,29 @@
                  }
 
               </div>
-              
+
               <span class="text-gray-600">{{ item.label }}</span>
             </div>
-            
+
             <!-- Dropdown Arrow -->
              @if (item.children) {
-                 <svg 
+                 <svg
                    class="w-4 h-4 text-gray-400 transition-transform duration-200"
                    [class.rotate-180]="item.expanded"
-                   fill="none" 
-                   stroke="currentColor" 
+                   fill="none"
+                   stroke="currentColor"
                    viewBox="0 0 24 24"
                  >
                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
                  </svg>
              }
-            
+
             <!-- Right Arrow for non-dropdown items -->
              @if (!item.children && item.id === 'add-transfer') {
-                 <svg 
+                 <svg
                    class="w-4 h-4 text-gray-400"
-                   fill="none" 
-                   stroke="currentColor" 
+                   fill="none"
+                   stroke="currentColor"
                    viewBox="0 0 24 24"
                  >
                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -122,23 +125,23 @@
              }
 
           </button>
-    
+
           <!-- Sub Menu Items -->
            @if (item.children && item.expanded) {
-               <div 
+               <div
                  class="ml-9 mt-2 space-y-1"
                >
                @for (subItem of item.children; track $index) {
                    <div class="flex items-center">
                      <!-- Connection Line -->
                      <div class="w-3 h-3 mr-3 flex items-center justify-center">
-                       <div 
+                       <div
                          class="w-2 h-2 rounded-full"
                          [class.bg-blue-500]="subItem.active"
                          [class.bg-gray-300]="!subItem.active"
                        ></div>
                      </div>
-                     
+
                      <button
                        (click)="onSubMenuClick(subItem)"
                        class="flex-1 text-left py-2 px-3 rounded-md text-sm transition-colors duration-200"
